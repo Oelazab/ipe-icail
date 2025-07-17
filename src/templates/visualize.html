@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Data Visualization</h2>
+    
+    <div class="visualizations">
+        {% for name, plot in plots %}
+            <div class="plot">
+                <img src="data:image/png;base64,{{ plot }}" alt="{{ name }}">
+            </div>
+        {% endfor %}
+    </div>
+    
+    <a href="{{ url_for('analyze', filename=filename) }}" class="btn">Back to Analysis</a>
+{% endblock %}

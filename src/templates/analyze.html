@@ -1,0 +1,146 @@
+{% extends "base.html" %} {% block content %}
+<h2>Data Analysis: {{ filename }}</h2>
+
+<div class="data-preview">{{ tables[0]|safe }}</div>
+
+<div class="preprocessing-options">
+  <h3>Data Preprocessing</h3>
+
+  <form method="POST">
+    <div class="preprocessing-section">
+      <h4>Drop Columns</h4>
+      <select name="columns" multiple>
+        {% for col in titles %}
+        <option value="{{ col }}">{{ col }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" name="drop_columns">Drop Selected Columns</button>
+    </div>
+
+    <div class="preprocessing-section">
+      <h4>Convert Categorical to Numerical</h4>
+      <select name="cat_columns" multiple>
+        {% for col in categorical_cols %}
+        <option value="{{ col }}">{{ col }}</option>
+        {% endfor %}
+      </select>
+
+      <div class="encoding-methods">
+        <h5>Encoding Methods:</h5>
+
+        <div class="method-group">
+          <label>
+            <input
+              type="radio"
+              name="conversion_method"
+              value="onehot"
+              checked
+            />
+            One-Hot Encoding (dummy variables)
+          </label>
+          <label>
+            <input type="radio" name="conversion_method" value="label" />
+            Label Encoding (integer codes)
+          </label>
+          <label>
+            <input type="radio" name="conversion_method" value="ordinal" />
+            Ordinal Encoding (ordered integers)
+          </label>
+        </div>
+
+        <div class="method-group">
+          <label>
+            <input type="radio" name="conversion_method" value="count" />
+            Count Encoding (frequency)
+          </label>
+          <label>
+            <input type="radio" name="conversion_method" value="binary" />
+            Binary Encoding (hash + binary)
+          </label>
+          <label>
+            <input type="radio" name="conversion_method" value="hash" />
+            Hashing Encoding (fixed dimension)
+            <input
+              type="number"
+              name="hash_components"
+              value="8"
+              min="1"
+              max="64"
+            />
+          </label>
+        </div>
+
+        <div class="method-group">
+          <label>
+            <input type="radio" name="conversion_method" value="baseN" />
+            BaseN Encoding (base
+            <input
+              type="number"
+              name="baseN_value"
+              value="2"
+              min="1"
+              max="36"
+            />)
+          </label>
+        </div>
+
+        <div class="target-based-methods" style="margin-top: 15px">
+          <h5>Target-Based Methods (requires target column):</h5>
+          <select name="target_column">
+            <option value="">-- Select Target --</option>
+            {% for col in numeric_cols %}
+            <option value="{{ col }}">{{ col }}</option>
+            {% endfor %}
+          </select>
+
+          <label>
+            <input type="radio" name="conversion_method" value="target" />
+            Target Encoding (mean target)
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="conversion_method"
+              value="leave_one_out"
+            />
+            Leave-One-Out Encoding
+          </label>
+          <label>
+            <input type="radio" name="conversion_method" value="catboost" />
+            CatBoost Encoding
+          </label>
+        </div>
+      </div>
+      <button type="submit" name="convert_categorical">Apply Encoding</button>
+      <button type="submit" name="parse_date">Parse Date</button>
+    </div>
+
+    <div class="preprocessing-section">
+      <h4>Handle Missing Values</h4>
+      <div>
+        <label>
+          <input type="radio" name="missing_method" value="drop" checked />
+          Drop rows with missing values
+        </label>
+        <label>
+          <input type="radio" name="missing_method" value="mean" />
+          Fill with mean (numeric only)
+        </label>
+        <label>
+          <input type="radio" name="missing_method" value="median" />
+          Fill with median (numeric only)
+        </label>
+        <label>
+          <input type="radio" name="missing_method" value="mode" />
+          Fill with mode
+        </label>
+      </div>
+      <button type="submit" name="handle_missing">Handle Missing Values</button>
+    </div>
+  </form>
+</div>
+
+<a href="{{ url_for('visualize', filename=filename) }}" class="btn"
+  >Visualize Data</a
+>
+{% endblock %}

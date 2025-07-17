@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.data-preview {
+    overflow-x: auto;
+    margin-bottom: 30px;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.preprocessing-options {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.preprocessing-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    min-height: 100px;
+}
+
+button, .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background-color: #45a049;
+}
+
+.visualizations {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.plot {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.plot img {
+    width: 100%;
+    height: auto;
+}
+
+.encoding-methods {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.method-group {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 3px;
+    border-left: 4px solid #4CAF50;
+}
+
+.target-based-methods {
+    padding: 10px;
+    background: #fff8e1;
+    border-radius: 3px;
+    border-left: 4px solid #ff9800;
+}
+
+.method-group label, .target-based-methods label {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.method-group input[type="number"] {
+    width: 50px;
+    padding: 3px;
+    margin: 0 5px;
+}
